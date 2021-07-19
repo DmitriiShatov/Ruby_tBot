@@ -256,6 +256,21 @@ namespace Ruby_tBot
                         };
                         await _bot.SendTextMessageAsync(message.From.Id, "Press \"Stop\" to Unsubscribe", replyMarkup: candleKeyboard);
                     }
+                    else if (krakenApi != null)
+                    {
+                        socket = await krakenApi.GetCandlesWebSocet(marketSymbol, message);
+                        var candleKeyboard = new ReplyKeyboardMarkup
+                        {
+                            Keyboard = new[]
+                            {
+                                        new[] {
+                                                new KeyboardButton("Stop"),
+                                              },
+                                     },
+                            ResizeKeyboard = true
+                        };
+                        await _bot.SendTextMessageAsync(message.From.Id, "Press \"Stop\" to Unsubscribe", replyMarkup: candleKeyboard);
+                    }
                     break;
                 case "more...":
                     if ((arrayKeyboard.Length - counter) < 100)
